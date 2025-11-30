@@ -1,11 +1,3 @@
-# MATLAB-specific
-*.asv
-*.m~
-*.mat
-*.slxc
-*.mex*
-/slprj/
-/sccprj/
 # OS-specific
 .DS_Store
 Thumbs.db
