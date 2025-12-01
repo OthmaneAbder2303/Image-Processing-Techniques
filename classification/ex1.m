@@ -1,4 +1,3 @@
-
 clear all
 close all
 I=imread('coloredChips.png');
