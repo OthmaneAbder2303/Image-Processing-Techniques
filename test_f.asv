@@ -1,36 +1,32 @@
-% % Définir une image 10x10 (exemple avec des valeurs aléatoires)
-% image_originale = randi([0, 255], 10, 10, 3);
-% 
-% % Définir un filtre 3x3 (exemple : filtre moyenneur)
-% filtre = (1/9) * ones(3, 3);
-% 
-% % Alternative : filtre de détection de contours
-% % filtre = [-1 -1 -1; -1 8 -1; -1 -1 -1];
-% 
-% % Appliquer la convolution
-% image_filtree = conv2(image_originale, filtre, 'same');
-% 
-% % Afficher les résultats
-% figure;
-% subplot(1,2,1); imshow(image_originale, []); title('Image originale');
-% subplot(1,2,2); imshow(image_filtree, []); title('Image filtrée');
+% Définir une image 10x10 (exemple avec des valeurs aléatoires)
+image_originale = randi([0, 255], 10, 10, 3);
+
+% Définir un filtre 3x3 (exemple : filtre moyenneur)
+filtre = (1/9) * ones(3, 3);
+
+% Alternative : filtre de détection de contours
+% filtre = [-1 -1 -1; -1 8 -1; -1 -1 -1];
+
+% Appliquer la convolution
+image_filtree = conv2(image_originale, filtre, 'same');
+
+% Afficher les résultats
+figure;
+subplot(1,2,1); imshow(image_originale, []); title('Image originale');
+subplot(1,2,2); imshow(image_filtree, []); title('Image filtrée');
 
 
 
-image = randi([0, 255], 5, 5);
+image = randi([0, 255], 5, 5, 3);
 
 filtre = (1/4) * [
     -1 0 1;
     -2 0 2;
     -1 0 1
-    ];
-figure;
-subplot(2,2,1);
-imshow(image, []);
+    ]
 
-image_filtrer = conv2(image, filtre, 'same');
-subplot(2,2,2);
-imshow(image_filtrer, []);
+image_filtrer = conv2(image, filtre, "same")
+
 
 % 
 % % Créer une image RGB 10x10 aléatoire

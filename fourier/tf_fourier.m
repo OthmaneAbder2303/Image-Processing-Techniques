@@ -1,0 +1,58 @@
+clear all; close all; clc;
+
+img_mit = imread("eight.tif");
+img_cam = imread("cameraman.tif");
+
+% imshow(img_mit, []);
+% 
+% figure;
+% imshow(img_cam, []);
+
+% Calcul de la FFT 2D
+fft_mit = fft2(img_mit);
+fft_cam = fft2(img_cam);
+
+% Translation des basses fréquences au centre
+fft_mit_centre = fftshift(fft_mit);
+fft_cam_centre = fftshift(fft_cam);
+
+% Affichage des résultats
+figure('Name', 'FFT des images', 'Position', [100 100 1200 800]);
+
+% Image MIT originale
+subplot(2,3,1);
+imshow(img_mit);
+title('Image MIT originale');
+
+% Spectre MIT (log du module)
+subplot(2,3,2);
+imshow(log(1 + abs(fft_mit_centre)), []);
+% colormap(gca, jet);
+% colorbar;
+title('Spectre MIT (log-magnitude)');
+
+% Phase MIT
+subplot(2,3,3);
+imshow(angle(fft_mit_centre), []);
+% colormap(gca, hsv);
+% colorbar;
+title('Phase MIT');
+
+% Image Cameraman originale
+subplot(2,3,4);
+imshow(img_cam);
+title('Image Cam originale');
+
+% Spectre Cameraman (log du module)
+subplot(2,3,5);
+imshow(log(1 + abs(fft_cam_centre)), []);
+colormap(gca, jet);
+colorbar;
+title('Spectre Cam (log-magnitude)');
+
+% Phase Cameraman
+subplot(2,3,6);
+imshow(angle(fft_cam_centre), []);
+colormap(gca, hsv);
+colorbar;
+title('Phase Cam');
