@@ -7,9 +7,8 @@ figure, imshow(I), title('Image coloredChips.png');
 t_b = 51;                     % taille du bloc = 51×51 (impair → centre bien défini)
 X = BlocMouse(I, t_b);        % clique au centre d'une pièce (ex : la rouge ou bleue bien visible)
 
-
 R = X(:,:,1); G = X(:,:,2); B = X(:,:,3);
-
+size(R)
 figure,
 subplot(2,2,1), imshow(X), title('Pièce référence X (51×51)');
 subplot(2,2,2), imhist(R), title('Histogramme R');
