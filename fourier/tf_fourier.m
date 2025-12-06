@@ -56,3 +56,49 @@ imshow(angle(fft_cam_centre), []);
 colormap(gca, hsv);
 colorbar;
 title('Phase Cam');
+
+
+
+%% 2. Annulation de la phase (phase = 0)
+
+% Garder uniquement le module
+fft_mit_sans_phase = abs(fft_mit_centre);
+fft_cam_sans_phase = abs(fft_cam_centre);
+
+% Transformée inverse
+img_mit_sans_phase = ifft2(ifftshift(fft_mit_sans_phase));
+img_cam_sans_phase = ifft2(ifftshift(fft_cam_sans_phase));
+
+% Affichage
+figure('Name', 'Question 2: Images sans phase', 'Position', [150 150 1000 400]);
+
+subplot(1,2,1);
+imshow(abs(img_mit_sans_phase), []);
+title('MIT sans phase (module seul)');
+
+subplot(1,2,2);
+imshow(abs(img_cam_sans_phase), []);
+title('Cameraman sans phase (module seul)');
+
+
+%% 3. Module constant pour tous les coefficients
+
+% Créer des FFT avec module constant = 1 et phase originale
+fft_mit_module_const = exp(1i * angle(fft_mit_centre));
+fft_cam_module_const = exp(1i * angle(fft_cam_centre));
+
+% Transformée inverse
+img_mit_module_const = ifft2(ifftshift(fft_mit_module_const));
+img_cam_module_const = ifft2(ifftshift(fft_cam_module_const));
+
+% Affichage
+figure('Name', 'Question 3: Images avec module constant', 'Position', [200 200 1000 400]);
+
+subplot(1,2,1);
+imshow(abs(img_mit_module_const), []);
+title('MIT avec module constant (phase seule)');
+
+subplot(1,2,2);
+imshow(abs(img_cam_module_const), []);
+title('Cameraman avec module constant (phase seule)');
+
