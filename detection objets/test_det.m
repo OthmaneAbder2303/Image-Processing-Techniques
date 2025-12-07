@@ -1,5 +1,19 @@
 image = imread('coloredChips.png');
 
+I = double(image);
+
+for k=1:3
+    X = I(:,:,k);
+    X = X(:);
+    moy = mean(X);
+    whos X
+    %et = std(X);
+    image_norm(:,:,k)= (I(:,:,k) - moy) ;%/ et;
+end
+size(image)
+size(image_norm)
+
+
 t = 51;
 X = BlocMouse(image, t);
 
