@@ -13,6 +13,7 @@ imshow(uint8(X));
 title("Réference");
 
 %%
+
 C_norm = CorrImage(I,X,true); % calculer la matrice des corrélations normalisée.
 
 %%
@@ -28,9 +29,27 @@ title("Réference")
 subplot(2,2,3);
 imshow(C_norm,[]);
 title("Corrélation normalisé")
+
 %%
 
-[P,Cs]=DetectPic(C_norm,0.9);
+[P,Cs]=DetectPic(C_norm,0.95);
+
+% Extraire les scores pour chaque position détectée
+scores = zeros(size(P, 1), 1);
+for i = 1:size(P, 1)
+    x = round(P(i, 1));  % Coordonnée x (colonne)
+    y = round(P(i, 2));  % Coordonnée y (ligne)
+    scores(i) = C_norm(y, x);  % Score à cette position
+end
+
+% Afficher les scores
+fprintf('\n=== SCORES DE DÉTECTION ===\n');
+for i = 1:length(scores)
+    fprintf('Détection %d : Position (%.1f, %.1f) - Score = %.4f\n', ...
+            i, P(i,1), P(i,2), scores(i));
+end
+fprintf('Meilleur score : %.4f\n', max(scores));
+fprintf('Score moyen : %.4f\n\n', mean(scores));
 
 figure(3)
 
@@ -54,7 +73,7 @@ title("Detection objet")
 J = colorspace('rgb->luv',I);
 Y = colorspace('rgb->luv',X);
 C_norm = CorrImage(J,Y,true); % calculer la matrice des corrélations normalisée.
-figure(4);
+
 subplot(2,2,1);
 imshow(J,[]);
 title("Image ")
